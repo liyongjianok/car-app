@@ -46,3 +46,10 @@ type SearchCarResp struct {
 	Total int64         `json:"total"`
 	List  []CarBaseInfo `json:"list"`
 }
+
+type UserInfoResp struct {
+	Uid      int64  `json:"uid"`
+	Phone    string `json:"phone"`
+	Nickname string `json:"nickname"`
+	Avatar   string `json:"avatar"`
+}

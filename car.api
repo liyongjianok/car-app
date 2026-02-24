@@ -7,6 +7,7 @@ info (
 	version: "v1.0"
 )
 
+// ---------------- 用户模块 ----------------
 type (
 	LoginReq {
 		Phone    string `json:"phone"`
@@ -16,6 +17,17 @@ type (
 		Token string `json:"token"`
 		Uid   int64  `json:"uid"`
 	}
+	// 【新增】用户信息返回体
+	UserInfoResp {
+		Uid      int64  `json:"uid"`
+		Phone    string `json:"phone"`
+		Nickname string `json:"nickname"`
+		Avatar   string `json:"avatar"`
+	}
+)
+
+// ---------------- 车型模块 ----------------
+type (
 	CarBaseInfo {
 		Id        int64   `json:"id"`
 		BrandName string  `json:"brandName"`
@@ -47,6 +59,8 @@ type (
 	}
 )
 
+// ---------------- 路由定义 ----------------
+// 公开接口 (无需登录)
 @server (
 	prefix: /api/v1
 	group:  public
@@ -62,13 +76,15 @@ service car-api {
 	get /cars/detail/:id (CarDetailReq) returns (CarDetailResp)
 }
 
+// 鉴权接口 (需要 JWT Token)
 @server (
 	prefix: /api/v1
 	group:  auth
-	jwt:    Auth
+	jwt:    Auth // 开启 JWT 鉴权
 )
 service car-api {
 	@handler GetUserInfo
-	get /user/info
+	// 【修改】这里加上了返回值类型 (UserInfoResp)
+	get /user/info returns (UserInfoResp)
 }
 
