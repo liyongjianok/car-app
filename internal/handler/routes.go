@@ -17,6 +17,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	server.AddRoutes(
 		[]rest.Route{
 			{
+				Method:  http.MethodPost,
+				Path:    "/cars/review",
+				Handler: auth.PostReviewHandler(serverCtx),
+			},
+			{
 				Method:  http.MethodGet,
 				Path:    "/user/info",
 				Handler: auth.GetUserInfoHandler(serverCtx),
@@ -32,6 +37,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Method:  http.MethodGet,
 				Path:    "/cars/detail/:id",
 				Handler: public.GetCarDetailHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/cars/reviews",
+				Handler: public.GetReviewListHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
