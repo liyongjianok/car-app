@@ -1,0 +1,24 @@
+Name: car-api
+Host: 0.0.0.0
+Port: 8888
+
+# JWT 鉴权配置
+Auth:
+  AccessSecret: "car_api_secret_key_change_me_in_prod"
+  AccessExpire: 86400 # Token有效期 1天
+
+# MySQL 数据库配置 (对应 Docker 里的设定)
+DataSource: root:root@tcp(127.0.0.1:3306)/car_db?charset=utf8mb4&parseTime=True&loc=Local
+
+# Redis 缓存配置
+CacheRedis:
+  - Host: 127.0.0.1:6379
+    Pass: 
+
+# MinIO 本地对象存储配置
+MinIO:
+  Endpoint: "127.0.0.1:9000"
+  AccessKey: "admin"
+  SecretKey: "password123"
+  UseSSL: false
+  Bucket: "cars-media"

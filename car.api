@@ -1,0 +1,74 @@
+syntax = "v1"
+
+info (
+	title:   "汽车资讯应用API"
+	desc:    "提供车型检索、配置详情、用户登录与评论功能"
+	author:  "Developer"
+	version: "v1.0"
+)
+
+type (
+	LoginReq {
+		Phone    string `json:"phone"`
+		Password string `json:"password"`
+	}
+	LoginResp {
+		Token string `json:"token"`
+		Uid   int64  `json:"uid"`
+	}
+	CarBaseInfo {
+		Id        int64   `json:"id"`
+		BrandName string  `json:"brandName"`
+		Series    string  `json:"series"`
+		ModelName string  `json:"modelName"`
+		Price     float64 `json:"price"`
+		CoverImg  string  `json:"coverImg"`
+	}
+	SearchCarReq {
+		Keyword   string  `form:"keyword,optional"`
+		BrandId   int64   `form:"brandId,optional"`
+		MinPrice  float64 `form:"minPrice,optional"`
+		MaxPrice  float64 `form:"maxPrice,optional"`
+		PageIndex int     `form:"pageIndex,default=1"`
+		PageSize  int     `form:"pageSize,default=10"`
+	}
+	SearchCarResp {
+		Total int64         `json:"total"`
+		List  []CarBaseInfo `json:"list"`
+	}
+	CarDetailReq {
+		Id int64 `path:"id"`
+	}
+	CarDetailResp {
+		BaseInfo CarBaseInfo            `json:"baseInfo"`
+		Specs    map[string]interface{} `json:"specs"`
+		Images   []string               `json:"images"`
+		VideoUrl string                 `json:"videoUrl"`
+	}
+)
+
+@server (
+	prefix: /api/v1
+	group:  public
+)
+service car-api {
+	@handler Login
+	post /user/login (LoginReq) returns (LoginResp)
+
+	@handler SearchCars
+	get /cars/search (SearchCarReq) returns (SearchCarResp)
+
+	@handler GetCarDetail
+	get /cars/detail/:id (CarDetailReq) returns (CarDetailResp)
+}
+
+@server (
+	prefix: /api/v1
+	group:  auth
+	jwt:    Auth
+)
+service car-api {
+	@handler GetUserInfo
+	get /user/info
+}
+
