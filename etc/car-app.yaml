@@ -7,13 +7,13 @@ Auth:
   AccessSecret: "car_api_secret_key_change_me_in_prod"
   AccessExpire: 86400
 
-# MySQL 数据库配置
-DataSource: root:rootpassword@tcp(127.0.0.1:3306)/car_db?charset=utf8mb4&parseTime=True&loc=Local
+# MySQL 数据库配置 (账号root，密码root)
+DataSource: root:root@tcp(127.0.0.1:3306)/car_db?charset=utf8mb4&parseTime=True&loc=Local
 
-# Redis 缓存配置 (必须是数组格式，注意下面的短横线)
+# Redis 缓存配置 (密码置空)
 Cache:
   - Host: 127.0.0.1:6379
-    Pass: redispassword
+    Pass: ""
 
 # MinIO 本地对象存储配置
 MinIO:
