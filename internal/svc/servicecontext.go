@@ -10,6 +10,9 @@ import (
 type ServiceContext struct {
 	Config config.Config
 
+	// 暴露原生 sqlx 连接，方便执行复杂多表联查
+	DbConn sqlx.SqlConn
+
 	// 注册生成的数据库 Model
 	UsersModel     model.UsersModel
 	CarBrandsModel model.CarBrandsModel
@@ -27,6 +30,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	// 2. 实例化各个表的 Model，并传入数据库连接和 Redis 缓存配置
 	return &ServiceContext{
 		Config:         c,
+		DbConn:         conn, // 挂载原生连接
 		UsersModel:     model.NewUsersModel(conn, c.Cache),
 		CarBrandsModel: model.NewCarBrandsModel(conn, c.Cache),
 		CarSeriesModel: model.NewCarSeriesModel(conn, c.Cache),
