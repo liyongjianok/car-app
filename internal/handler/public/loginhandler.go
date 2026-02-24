@@ -6,9 +6,10 @@ package public
 import (
 	"net/http"
 
-	"car-api/internal/logic/public"
-	"car-api/internal/svc"
-	"car-api/internal/types"
+	"car-app/internal/logic/public"
+	"car-app/internal/svc"
+	"car-app/internal/types"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 

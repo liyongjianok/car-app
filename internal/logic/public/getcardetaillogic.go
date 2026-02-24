@@ -6,8 +6,8 @@ package public
 import (
 	"context"
 
-	"car-api/internal/svc"
-	"car-api/internal/types"
+	"car-app/internal/svc"
+	"car-app/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

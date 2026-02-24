@@ -7,15 +7,15 @@ import (
 	"flag"
 	"fmt"
 
-	"car-api/internal/config"
-	"car-api/internal/handler"
-	"car-api/internal/svc"
+	"car-app/internal/config"
+	"car-app/internal/handler"
+	"car-app/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"
 )
 
-var configFile = flag.String("f", "etc/car-api.yaml", "the config file")
+var configFile = flag.String("f", "etc/car-app.yaml", "the config file")
 
 func main() {
 	flag.Parse()

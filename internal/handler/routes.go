@@ -6,9 +6,9 @@ package handler
 import (
 	"net/http"
 
-	auth "car-api/internal/handler/auth"
-	public "car-api/internal/handler/public"
-	"car-api/internal/svc"
+	auth "car-app/internal/handler/auth"
+	public "car-app/internal/handler/public"
+	"car-app/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )

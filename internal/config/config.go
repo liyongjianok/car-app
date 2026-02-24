@@ -17,8 +17,8 @@ type Config struct {
 	// Database
 	DataSource string
 
-	// Redis Cache
-	CacheRedis cache.CacheConf
+	// Redis Cache (此类型底层为 []NodeConf)
+	Cache cache.CacheConf
 
 	// MinIO Config
 	MinIO struct {

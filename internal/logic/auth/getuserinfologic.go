@@ -6,7 +6,8 @@ package auth
 import (
 	"context"
 
-	"car-api/internal/svc"
+	"car-app/internal/svc"
+
 	"github.com/zeromicro/go-zero/core/logx"
 )
 

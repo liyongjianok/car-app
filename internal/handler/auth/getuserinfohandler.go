@@ -6,8 +6,9 @@ package auth
 import (
 	"net/http"
 
-	"car-api/internal/logic/auth"
-	"car-api/internal/svc"
+	"car-app/internal/logic/auth"
+	"car-app/internal/svc"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
