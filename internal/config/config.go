@@ -8,24 +8,21 @@ import (
 type Config struct {
 	rest.RestConf
 
-	// JWT Auth
 	Auth struct {
-		AccessSecret string
-		AccessExpire int64
-	}
+		AccessSecret string `json:"AccessSecret"`
+		AccessExpire int64  `json:"AccessExpire"`
+	} `json:"Auth"`
 
-	// Database
-	DataSource string
+	DataSource string `json:"DataSource"`
 
-	// Redis Cache (此类型底层为 []NodeConf)
-	Cache cache.CacheConf
+	// 强制映射 Cache 数组
+	Cache cache.CacheConf `json:"Cache"`
 
-	// MinIO Config
 	MinIO struct {
-		Endpoint  string
-		AccessKey string
-		SecretKey string
-		UseSSL    bool
-		Bucket    string
-	}
+		Endpoint  string `json:"Endpoint"`
+		AccessKey string `json:"AccessKey"`
+		SecretKey string `json:"SecretKey"`
+		UseSSL    bool   `json:"UseSSL"`
+		Bucket    string `json:"Bucket"`
+	} `json:"MinIO"`
 }
