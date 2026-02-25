@@ -75,6 +75,15 @@ type SearchCarResp struct {
 	List  []CarBaseInfo `json:"list"`
 }
 
+type UpdateUserReq struct {
+	Nickname string `json:"nickname"`
+	Avatar   string `json:"avatar"`
+}
+
+type UpdateUserResp struct {
+	Message string `json:"message"`
+}
+
 type UserInfoResp struct {
 	Uid      int64  `json:"uid"`
 	Phone    string `json:"phone"`

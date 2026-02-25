@@ -1,130 +1,139 @@
 syntax = "v1"
 
-info(
-    title: "汽车资讯应用API"
-    desc: "提供车型检索、配置详情、用户登录与评论功能"
-    author: "Developer"
-    version: "v1.0"
+info (
+	title:   "汽车资讯应用API"
+	desc:    "提供车型检索、配置详情、用户登录与评论功能"
+	author:  "Developer"
+	version: "v1.0"
 )
 
 // ---------------- 用户与鉴权模块 ----------------
 type (
-    LoginReq {
-        Phone    string `json:"phone"`
-        Password string `json:"password"`
-    }
-    LoginResp {
-        Token string `json:"token"`
-        Uid   int64  `json:"uid"`
-    }
-    UserInfoResp {
-        Uid      int64  `json:"uid"`
-        Phone    string `json:"phone"`
-        Nickname string `json:"nickname"`
-        Avatar   string `json:"avatar"`
-    }
+	LoginReq {
+		Phone    string `json:"phone"`
+		Password string `json:"password"`
+	}
+	LoginResp {
+		Token string `json:"token"`
+		Uid   int64  `json:"uid"`
+	}
+	UserInfoResp {
+		Uid      int64  `json:"uid"`
+		Phone    string `json:"phone"`
+		Nickname string `json:"nickname"`
+		Avatar   string `json:"avatar"`
+	}
+	// 修改用户资料请求
+	UpdateUserReq {
+		Nickname string `json:"nickname"`
+		Avatar   string `json:"avatar"`
+	}
+	// 修改用户资料响应
+	UpdateUserResp {
+		Message string `json:"message"`
+	}
 )
 
 // ---------------- 车型核心模块 ----------------
 type (
-    CarBaseInfo {
-        Id        int64   `json:"id"`
-        BrandName string  `json:"brandName"`
-        Series    string  `json:"series"`
-        ModelName string  `json:"modelName"`
-        Price     float64 `json:"price"`
-        CoverImg  string  `json:"coverImg"`
-    }
-    SearchCarReq {
-        Keyword   string  `form:"keyword,optional"`
-        BrandId   int64   `form:"brandId,optional"`
-        MinPrice  float64 `form:"minPrice,optional"`
-        MaxPrice  float64 `form:"maxPrice,optional"`
-        PageIndex int     `form:"pageIndex,default=1"`
-        PageSize  int     `form:"pageSize,default=10"`
-    }
-    SearchCarResp {
-        Total int64         `json:"total"`
-        List  []CarBaseInfo `json:"list"`
-    }
-    CarDetailReq {
-        Id int64 `path:"id"`
-    }
-    CarDetailResp {
-        BaseInfo CarBaseInfo            `json:"baseInfo"`
-        Specs    map[string]interface{} `json:"specs"`
-        Images   []string               `json:"images"`
-        VideoUrl string                 `json:"videoUrl"`
-    }
+	CarBaseInfo {
+		Id        int64   `json:"id"`
+		BrandName string  `json:"brandName"`
+		Series    string  `json:"series"`
+		ModelName string  `json:"modelName"`
+		Price     float64 `json:"price"`
+		CoverImg  string  `json:"coverImg"`
+	}
+	SearchCarReq {
+		Keyword   string  `form:"keyword,optional"`
+		BrandId   int64   `form:"brandId,optional"`
+		MinPrice  float64 `form:"minPrice,optional"`
+		MaxPrice  float64 `form:"maxPrice,optional"`
+		PageIndex int     `form:"pageIndex,default=1"`
+		PageSize  int     `form:"pageSize,default=10"`
+	}
+	SearchCarResp {
+		Total int64         `json:"total"`
+		List  []CarBaseInfo `json:"list"`
+	}
+	CarDetailReq {
+		Id int64 `path:"id"`
+	}
+	CarDetailResp {
+		BaseInfo CarBaseInfo            `json:"baseInfo"`
+		Specs    map[string]interface{} `json:"specs"`
+		Images   []string               `json:"images"`
+		VideoUrl string                 `json:"videoUrl"`
+	}
 )
 
 // ---------------- 评论模块 ----------------
 type (
-    // 发表评论请求
-    PostReviewReq {
-        ModelId int64   `json:"modelId"`
-        Score   float64 `json:"score"`
-        Content string  `json:"content"`
-    }
-    
-    // 评论单条信息结构
-    ReviewInfo {
-        Id         int64   `json:"id"`
-        Uid        int64   `json:"uid"`
-        Nickname   string  `json:"nickname"`
-        Avatar     string  `json:"avatar"`
-        Score      float64 `json:"score"`
-        Content    string  `json:"content"`
-        Likes      int64   `json:"likes"`
-        CreateTime string  `json:"createTime"`
-    }
-    
-    // 拉取评论列表请求
-    GetReviewListReq {
-        ModelId   int64 `form:"modelId"`
-        PageIndex int   `form:"pageIndex,default=1"`
-        PageSize  int   `form:"pageSize,default=10"`
-    }
-    
-    // 拉取评论列表响应
-    GetReviewListResp {
-        Total int64        `json:"total"`
-        List  []ReviewInfo `json:"list"`
-    }
+	// 发表评论请求
+	PostReviewReq {
+		ModelId int64   `json:"modelId"`
+		Score   float64 `json:"score"`
+		Content string  `json:"content"`
+	}
+	// 评论单条信息结构
+	ReviewInfo {
+		Id         int64   `json:"id"`
+		Uid        int64   `json:"uid"`
+		Nickname   string  `json:"nickname"`
+		Avatar     string  `json:"avatar"`
+		Score      float64 `json:"score"`
+		Content    string  `json:"content"`
+		Likes      int64   `json:"likes"`
+		CreateTime string  `json:"createTime"`
+	}
+	// 拉取评论列表请求
+	GetReviewListReq {
+		ModelId   int64 `form:"modelId"`
+		PageIndex int   `form:"pageIndex,default=1"`
+		PageSize  int   `form:"pageSize,default=10"`
+	}
+	// 拉取评论列表响应
+	GetReviewListResp {
+		Total int64        `json:"total"`
+		List  []ReviewInfo `json:"list"`
+	}
 )
-
 
 // ---------------- 路由定义 ----------------
-
 // 公开接口 (无需登录即可访问)
-@server(
-    prefix: /api/v1
-    group: public
+@server (
+	prefix: /api/v1
+	group:  public
 )
 service car-api {
-    @handler Login
-    post /user/login (LoginReq) returns (LoginResp)
+	@handler Login
+	post /user/login (LoginReq) returns (LoginResp)
 
-    @handler SearchCars
-    get /cars/search (SearchCarReq) returns (SearchCarResp)
+	@handler SearchCars
+	get /cars/search (SearchCarReq) returns (SearchCarResp)
 
-    @handler GetCarDetail
-    get /cars/detail/:id (CarDetailReq) returns (CarDetailResp)
- 
-    @handler GetReviewList
-    get /cars/reviews (GetReviewListReq) returns (GetReviewListResp)
+	@handler GetCarDetail
+	get /cars/detail/:id (CarDetailReq) returns (CarDetailResp)
+
+	@handler GetReviewList
+	get /cars/reviews (GetReviewListReq) returns (GetReviewListResp)
 }
 
 // 鉴权接口 (Header 必须带 Token)
-@server(
-    prefix: /api/v1
-    group: auth
-    jwt: Auth
+@server (
+	prefix: /api/v1
+	group:  auth
+	jwt:    Auth
 )
 service car-api {
-    @handler GetUserInfo
-    get /user/info returns (UserInfoResp)
- 
-    @handler PostReview
-    post /cars/review (PostReviewReq) returns ()
+	@handler GetUserInfo
+	get /user/info returns (UserInfoResp)
+
+	// 修改用户信息路由
+	@handler UpdateUserInfo
+	post /user/update (UpdateUserReq) returns (UpdateUserResp)
+
+	@handler PostReview
+	post /cars/review (PostReviewReq)
 }
+
