@@ -106,6 +106,15 @@ type PostReviewReq struct {
 	Content string  `json:"content"`
 }
 
+type RegisterReq struct {
+	Phone    string `json:"phone"`
+	Password string `json:"password"`
+}
+
+type RegisterResp struct {
+	Message string `json:"message"`
+}
+
 type ReviewInfo struct {
 	Id         int64   `json:"id"`
 	Uid        int64   `json:"uid"`

@@ -17,6 +17,13 @@ type (
 		Token string `json:"token"`
 		Uid   int64  `json:"uid"`
 	}
+	RegisterReq {
+		Phone    string `json:"phone"`
+		Password string `json:"password"`
+	}
+	RegisterResp {
+		Message string `json:"message"`
+	}
 	UserInfoResp {
 		Uid      int64  `json:"uid"`
 		Phone    string `json:"phone"`
@@ -146,6 +153,9 @@ type (
 service car-api {
 	@handler Login
 	post /user/login (LoginReq) returns (LoginResp)
+
+	@handler Register
+	post /user/register (RegisterReq) returns (RegisterResp)
 
 	@handler GetCarBrands
 	get /cars/brands returns (GetCarBrandsResp)
