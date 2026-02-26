@@ -22,6 +22,21 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: auth.PostReviewHandler(serverCtx),
 			},
 			{
+				Method:  http.MethodPost,
+				Path:    "/user/favorite/add",
+				Handler: auth.AddFavoriteHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/user/favorite/remove",
+				Handler: auth.RemoveFavoriteHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/user/favorites",
+				Handler: auth.GetMyFavoritesHandler(serverCtx),
+			},
+			{
 				Method:  http.MethodGet,
 				Path:    "/user/info",
 				Handler: auth.GetUserInfoHandler(serverCtx),

@@ -40,13 +40,13 @@ type (
 	}
 
 	CarSpecs struct {
-		ModelId      uint64         `db:"model_id"`      // 关联车型ID，作为主键
-		Engine       string         `db:"engine"`        // 发动机，如：1.5T 192马力 L4
-		Transmission string         `db:"transmission"`  // 变速箱，如：CVT无级变速
-		Dimensions   string         `db:"dimensions"`    // 长宽高(mm)
-		BaseParams   sql.NullString `db:"base_params"`   // 基础参数(JSON结构)
-		SafetyParams sql.NullString `db:"safety_params"` // 安全配置(JSON结构)
-		MediaParams  sql.NullString `db:"media_params"`  // 多媒体配置(JSON结构)
+		ModelId      uint64         `db:"model_id"`
+		Engine       string         `db:"engine"`
+		Transmission string         `db:"transmission"`
+		Dimensions   string         `db:"dimensions"`
+		BaseParams   sql.NullString `db:"base_params"`
+		SafetyParams sql.NullString `db:"safety_params"`
+		MediaParams  sql.NullString `db:"media_params"`
 	}
 )
 

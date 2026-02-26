@@ -44,10 +44,10 @@ type (
 
 	Users struct {
 		Id         uint64    `db:"id"`
-		Phone      string    `db:"phone"`    // 手机号
-		Password   string    `db:"password"` // 密码哈希
-		Nickname   string    `db:"nickname"` // 昵称
-		Avatar     string    `db:"avatar"`   // 头像URL(MinIO)
+		Phone      string    `db:"phone"`
+		Password   string    `db:"password"`
+		Nickname   string    `db:"nickname"`
+		Avatar     string    `db:"avatar"`
 		CreateTime time.Time `db:"create_time"`
 		UpdateTime time.Time `db:"update_time"`
 	}

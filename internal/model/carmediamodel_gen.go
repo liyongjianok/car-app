@@ -41,11 +41,11 @@ type (
 
 	CarMedia struct {
 		Id        uint64 `db:"id"`
-		ModelId   uint64 `db:"model_id"`   // 关联车型ID
+		ModelId   uint64 `db:"model_id"`
 		MediaType int64  `db:"media_type"` // 1:图片 2:视频
-		Position  string `db:"position"`   // 位置分类：外观/内饰/中控/视频
-		Url       string `db:"url"`        // 资源地址(MinIO)
-		Sort      int64  `db:"sort"`       // 展示排序
+		Position  string `db:"position"`
+		Url       string `db:"url"`
+		Sort      int64  `db:"sort"`
 	}
 )
 

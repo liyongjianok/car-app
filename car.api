@@ -2,7 +2,7 @@ syntax = "v1"
 
 info (
 	title:   "汽车资讯应用API"
-	desc:    "提供车型检索、配置详情、用户登录与评论功能"
+	desc:    "提供车型检索、配置详情、用户登录与评论、收藏功能"
 	author:  "Developer"
 	version: "v1.0"
 )
@@ -23,34 +23,12 @@ type (
 		Nickname string `json:"nickname"`
 		Avatar   string `json:"avatar"`
 	}
-	// 修改用户资料请求
 	UpdateUserReq {
-		Nickname string `json:"nickname"`
-		Avatar   string `json:"avatar"`
+		Nickname string `json:"nickname,optional"`
+		Avatar   string `json:"avatar,optional"`
 	}
-	// 修改用户资料响应
 	UpdateUserResp {
 		Message string `json:"message"`
-	}
-	// 我的单条评论信息
-	MyReviewInfo {
-		Id         int64   `json:"id"`
-		ModelId    int64   `json:"modelId"`
-		CarName    string  `json:"carName"`
-		CarImg     string  `json:"carImg"`
-		Score      float64 `json:"score"`
-		Content    string  `json:"content"`
-		CreateTime string  `json:"createTime"`
-	}
-	// 获取我的评论列表请求
-	GetMyReviewsReq {
-		PageIndex int `form:"pageIndex,optional,default=1"`
-		PageSize  int `form:"pageSize,optional,default=10"`
-	}
-	// 获取我的评论列表响应
-	GetMyReviewsResp {
-		Total int64          `json:"total"`
-		List  []MyReviewInfo `json:"list"`
 	}
 )
 
@@ -87,15 +65,13 @@ type (
 	}
 )
 
-// ---------------- 评论模块 ----------------
+// ---------------- 评论与收藏模块 ----------------
 type (
-	// 发表评论请求
 	PostReviewReq {
 		ModelId int64   `json:"modelId"`
 		Score   float64 `json:"score"`
 		Content string  `json:"content"`
 	}
-	// 评论单条信息结构
 	ReviewInfo {
 		Id         int64   `json:"id"`
 		Uid        int64   `json:"uid"`
@@ -106,21 +82,55 @@ type (
 		Likes      int64   `json:"likes"`
 		CreateTime string  `json:"createTime"`
 	}
-	// 拉取评论列表请求
 	GetReviewListReq {
 		ModelId   int64 `form:"modelId"`
-		PageIndex int   `form:"pageIndex,default=1"`
-		PageSize  int   `form:"pageSize,default=10"`
+		PageIndex int   `form:"pageIndex,optional,default=1"`
+		PageSize  int   `form:"pageSize,optional,default=10"`
 	}
-	// 拉取评论列表响应
 	GetReviewListResp {
 		Total int64        `json:"total"`
 		List  []ReviewInfo `json:"list"`
 	}
+	MyReviewInfo {
+		Id         int64   `json:"id"`
+		ModelId    int64   `json:"modelId"`
+		CarName    string  `json:"carName"`
+		CarImg     string  `json:"carImg"`
+		Score      float64 `json:"score"`
+		Content    string  `json:"content"`
+		CreateTime string  `json:"createTime"`
+	}
+	GetMyReviewsReq {
+		PageIndex int `form:"pageIndex,optional,default=1"`
+		PageSize  int `form:"pageSize,optional,default=10"`
+	}
+	GetMyReviewsResp {
+		Total int64          `json:"total"`
+		List  []MyReviewInfo `json:"list"`
+	}
+	FavoriteReq {
+		ModelId int64 `json:"modelId"`
+	}
+	FavoriteResp {
+		Message string `json:"message"`
+	}
+	GetMyFavoritesReq {
+		PageIndex int `form:"pageIndex,optional,default=1"`
+		PageSize  int `form:"pageSize,optional,default=10"`
+	}
+	FavoriteItem {
+		Id      int64   `json:"id"`
+		ModelId int64   `json:"modelId"`
+		CarName string  `json:"carName"`
+		CarImg  string  `json:"carImg"`
+		Price   float64 `json:"price"`
+	}
+	GetMyFavoritesResp {
+		Total int64          `json:"total"`
+		List  []FavoriteItem `json:"list"`
+	}
 )
 
-// ---------------- 路由定义 ----------------
-// 公开接口 (无需登录即可访问)
 @server (
 	prefix: /api/v1
 	group:  public
@@ -139,7 +149,6 @@ service car-api {
 	get /cars/reviews (GetReviewListReq) returns (GetReviewListResp)
 }
 
-// 鉴权接口 (Header 必须带 Token)
 @server (
 	prefix: /api/v1
 	group:  auth
@@ -149,7 +158,6 @@ service car-api {
 	@handler GetUserInfo
 	get /user/info returns (UserInfoResp)
 
-	// 修改用户信息路由
 	@handler UpdateUserInfo
 	post /user/update (UpdateUserReq) returns (UpdateUserResp)
 
@@ -158,5 +166,14 @@ service car-api {
 
 	@handler GetMyReviews
 	get /user/reviews (GetMyReviewsReq) returns (GetMyReviewsResp)
+
+	@handler AddFavorite
+	post /user/favorite/add (FavoriteReq) returns (FavoriteResp)
+
+	@handler RemoveFavorite
+	post /user/favorite/remove (FavoriteReq) returns (FavoriteResp)
+
+	@handler GetMyFavorites
+	get /user/favorites (GetMyFavoritesReq) returns (GetMyFavoritesResp)
 }
 

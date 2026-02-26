@@ -44,9 +44,9 @@ type (
 		Id         uint64    `db:"id"`
 		UserId     uint64    `db:"user_id"`
 		ModelId    uint64    `db:"model_id"`
-		Score      float64   `db:"score"`   // 评分1.0-5.0
-		Content    string    `db:"content"` // 评论内容
-		Likes      int64     `db:"likes"`   // 点赞数
+		Score      float64   `db:"score"`
+		Content    string    `db:"content"`
+		Likes      int64     `db:"likes"`
 		CreateTime time.Time `db:"create_time"`
 	}
 )

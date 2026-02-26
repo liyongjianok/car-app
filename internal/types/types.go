@@ -23,6 +23,32 @@ type CarDetailResp struct {
 	VideoUrl string                 `json:"videoUrl"`
 }
 
+type FavoriteItem struct {
+	Id      int64   `json:"id"`
+	ModelId int64   `json:"modelId"`
+	CarName string  `json:"carName"`
+	CarImg  string  `json:"carImg"`
+	Price   float64 `json:"price"`
+}
+
+type FavoriteReq struct {
+	ModelId int64 `json:"modelId"`
+}
+
+type FavoriteResp struct {
+	Message string `json:"message"`
+}
+
+type GetMyFavoritesReq struct {
+	PageIndex int `form:"pageIndex,optional,default=1"`
+	PageSize  int `form:"pageSize,optional,default=10"`
+}
+
+type GetMyFavoritesResp struct {
+	Total int64          `json:"total"`
+	List  []FavoriteItem `json:"list"`
+}
+
 type GetMyReviewsReq struct {
 	PageIndex int `form:"pageIndex,optional,default=1"`
 	PageSize  int `form:"pageSize,optional,default=10"`
@@ -35,8 +61,8 @@ type GetMyReviewsResp struct {
 
 type GetReviewListReq struct {
 	ModelId   int64 `form:"modelId"`
-	PageIndex int   `form:"pageIndex,default=1"`
-	PageSize  int   `form:"pageSize,default=10"`
+	PageIndex int   `form:"pageIndex,optional,default=1"`
+	PageSize  int   `form:"pageSize,optional,default=10"`
 }
 
 type GetReviewListResp struct {
@@ -96,8 +122,8 @@ type SearchCarResp struct {
 }
 
 type UpdateUserReq struct {
-	Nickname string `json:"nickname"`
-	Avatar   string `json:"avatar"`
+	Nickname string `json:"nickname,optional"`
+	Avatar   string `json:"avatar,optional"`
 }
 
 type UpdateUserResp struct {

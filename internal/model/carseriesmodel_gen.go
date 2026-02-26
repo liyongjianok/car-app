@@ -41,8 +41,8 @@ type (
 
 	CarSeries struct {
 		Id      uint64 `db:"id"`
-		BrandId uint64 `db:"brand_id"` // 关联品牌ID
-		Name    string `db:"name"`     // 车系名称，如：雅阁
+		BrandId uint64 `db:"brand_id"`
+		Name    string `db:"name"`
 	}
 )
 

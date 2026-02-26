@@ -41,10 +41,10 @@ type (
 
 	CarBrands struct {
 		Id      uint64 `db:"id"`
-		Name    string `db:"name"`    // 品牌名称，如：本田
-		Logo    string `db:"logo"`    // 品牌Logo(MinIO)
-		Initial string `db:"initial"` // 首字母A-Z
-		Sort    int64  `db:"sort"`    // 排序
+		Name    string `db:"name"`
+		Logo    string `db:"logo"`
+		Initial string `db:"initial"`
+		Sort    int64  `db:"sort"`
 	}
 )
 

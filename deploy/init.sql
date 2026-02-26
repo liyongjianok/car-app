@@ -94,6 +94,15 @@ CREATE TABLE `reviews` (
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
+CREATE TABLE `favorites` (
+    `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+    `user_id` bigint unsigned NOT NULL,
+    `model_id` bigint unsigned NOT NULL,
+    `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_user_model` (`user_id`, `model_id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
 -- ----------------------------
 -- 插入测试数据 (基础数据)
 -- ----------------------------

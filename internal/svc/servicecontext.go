@@ -21,6 +21,7 @@ type ServiceContext struct {
 	CarSpecsModel  model.CarSpecsModel
 	CarMediaModel  model.CarMediaModel
 	ReviewsModel   model.ReviewsModel
+	FavoritesModel model.FavoritesModel
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -38,5 +39,6 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		CarSpecsModel:  model.NewCarSpecsModel(conn, c.Cache),
 		CarMediaModel:  model.NewCarMediaModel(conn, c.Cache),
 		ReviewsModel:   model.NewReviewsModel(conn, c.Cache),
+		FavoritesModel: model.NewFavoritesModel(conn, c.Cache),
 	}
 }

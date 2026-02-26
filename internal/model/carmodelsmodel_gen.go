@@ -41,12 +41,12 @@ type (
 
 	CarModels struct {
 		Id       uint64  `db:"id"`
-		SeriesId uint64  `db:"series_id"` // 关联车系ID
-		Name     string  `db:"name"`      // 车型名称，如：2024款 260TURBO 豪华版
-		Year     int64   `db:"year"`      // 年款，如：2024
-		Price    float64 `db:"price"`     // 指导价(万元)
-		CoverImg string  `db:"cover_img"` // 列表封面图(MinIO)
-		Status   int64   `db:"status"`    // 状态：1在售，0停售
+		SeriesId uint64  `db:"series_id"`
+		Name     string  `db:"name"`
+		Year     int64   `db:"year"`
+		Price    float64 `db:"price"`
+		CoverImg string  `db:"cover_img"`
+		Status   int64   `db:"status"`
 	}
 )
 
