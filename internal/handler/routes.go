@@ -60,6 +60,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
+				Path:    "/cars/brands",
+				Handler: public.GetCarBrandsHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
 				Path:    "/cars/detail/:id",
 				Handler: public.GetCarDetailHandler(serverCtx),
 			},

@@ -34,6 +34,14 @@ type (
 
 // ---------------- 车型核心模块 ----------------
 type (
+	CarBrand {
+		Id   int64  `json:"id"`
+		Name string `json:"name"`
+		Logo string `json:"logo"`
+	}
+	GetCarBrandsResp {
+		List []CarBrand `json:"list"`
+	}
 	CarBaseInfo {
 		Id        int64   `json:"id"`
 		BrandName string  `json:"brandName"`
@@ -138,6 +146,9 @@ type (
 service car-api {
 	@handler Login
 	post /user/login (LoginReq) returns (LoginResp)
+
+	@handler GetCarBrands
+	get /cars/brands returns (GetCarBrandsResp)
 
 	@handler SearchCars
 	get /cars/search (SearchCarReq) returns (SearchCarResp)

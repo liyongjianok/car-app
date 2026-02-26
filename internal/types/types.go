@@ -12,6 +12,12 @@ type CarBaseInfo struct {
 	CoverImg  string  `json:"coverImg"`
 }
 
+type CarBrand struct {
+	Id   int64  `json:"id"`
+	Name string `json:"name"`
+	Logo string `json:"logo"`
+}
+
 type CarDetailReq struct {
 	Id int64 `path:"id"`
 }
@@ -37,6 +43,10 @@ type FavoriteReq struct {
 
 type FavoriteResp struct {
 	Message string `json:"message"`
+}
+
+type GetCarBrandsResp struct {
+	List []CarBrand `json:"list"`
 }
 
 type GetMyFavoritesReq struct {
