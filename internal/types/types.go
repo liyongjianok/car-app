@@ -141,8 +141,8 @@ type SearchCarResp struct {
 }
 
 type UpdateUserReq struct {
-	Nickname string `json:"nickname,optional"`
-	Avatar   string `json:"avatar,optional"`
+	Nickname string `json:"nickname"`
+	Avatar   string `json:"avatar"`
 }
 
 type UpdateUserResp struct {
