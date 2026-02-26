@@ -32,6 +32,26 @@ type (
 	UpdateUserResp {
 		Message string `json:"message"`
 	}
+	// 我的单条评论信息
+	MyReviewInfo {
+		Id         int64   `json:"id"`
+		ModelId    int64   `json:"modelId"`
+		CarName    string  `json:"carName"`
+		CarImg     string  `json:"carImg"`
+		Score      float64 `json:"score"`
+		Content    string  `json:"content"`
+		CreateTime string  `json:"createTime"`
+	}
+	// 获取我的评论列表请求
+	GetMyReviewsReq {
+		PageIndex int `form:"pageIndex,optional,default=1"`
+		PageSize  int `form:"pageSize,optional,default=10"`
+	}
+	// 获取我的评论列表响应
+	GetMyReviewsResp {
+		Total int64          `json:"total"`
+		List  []MyReviewInfo `json:"list"`
+	}
 )
 
 // ---------------- 车型核心模块 ----------------
@@ -135,5 +155,8 @@ service car-api {
 
 	@handler PostReview
 	post /cars/review (PostReviewReq)
+
+	@handler GetMyReviews
+	get /user/reviews (GetMyReviewsReq) returns (GetMyReviewsResp)
 }
 

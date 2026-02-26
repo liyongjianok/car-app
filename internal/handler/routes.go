@@ -27,6 +27,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: auth.GetUserInfoHandler(serverCtx),
 			},
 			{
+				Method:  http.MethodGet,
+				Path:    "/user/reviews",
+				Handler: auth.GetMyReviewsHandler(serverCtx),
+			},
+			{
 				Method:  http.MethodPost,
 				Path:    "/user/update",
 				Handler: auth.UpdateUserInfoHandler(serverCtx),

@@ -23,6 +23,16 @@ type CarDetailResp struct {
 	VideoUrl string                 `json:"videoUrl"`
 }
 
+type GetMyReviewsReq struct {
+	PageIndex int `form:"pageIndex,optional,default=1"`
+	PageSize  int `form:"pageSize,optional,default=10"`
+}
+
+type GetMyReviewsResp struct {
+	Total int64          `json:"total"`
+	List  []MyReviewInfo `json:"list"`
+}
+
 type GetReviewListReq struct {
 	ModelId   int64 `form:"modelId"`
 	PageIndex int   `form:"pageIndex,default=1"`
@@ -42,6 +52,16 @@ type LoginReq struct {
 type LoginResp struct {
 	Token string `json:"token"`
 	Uid   int64  `json:"uid"`
+}
+
+type MyReviewInfo struct {
+	Id         int64   `json:"id"`
+	ModelId    int64   `json:"modelId"`
+	CarName    string  `json:"carName"`
+	CarImg     string  `json:"carImg"`
+	Score      float64 `json:"score"`
+	Content    string  `json:"content"`
+	CreateTime string  `json:"createTime"`
 }
 
 type PostReviewReq struct {
